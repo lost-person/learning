@@ -1,0 +1,235 @@
+兼容 HTML
+
+    HTML 是一种发布的格式，Markdown 是一种书写的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。
+    不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown 。
+
+    要制约的只有一些 HTML 区块元素――比如 <div>、<table>、<pre>、<p> 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。
+    Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 <p> 标签。
+
+    在 HTML 区块标签间的 Markdown 格式语法将不会被处理。然而，HTML 的区段（行内）标签如 <span>、<cite>、<del> 可以在 Markdown 的段落、列表或是标题里随意使用。
+
+    HTML中的两个特殊字符：<，&。< 符号用于起始标签，& 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 &lt; 和 &amp;。
+    Markdown可以自然地书写字符，自动处理转换。比如：
+        1.文档中插入版权符号，&copy；Markdown会原封不动的保留。
+        2.如果是AT&T，则Markdown会自动转换为AT&amp;T
+
+    不过需要注意的是，code 范围内，不论是行内还是区块， < 和 & 两个符号都一定会被转换成 HTML 实体，这项特性让你可以很容易地用 Markdown 写 HTML code （和 HTML 相对而言， 
+    HTML 语法中，你要把所有的 < 和 & 都转换为 HTML 实体，才能在 HTML 文件里面写出 HTML code。）
+
+段落和换行
+
+    一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则
+    该行也会被视为空行）。普通段落不该用空格或制表符来缩进。
+
+标题
+
+    Markdown 支持两种标题的语法，类 Setext 和类 atx 形式。
+
+    类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题），例如：
+
+        This is an H1
+        =============
+
+        This is an H2
+        -------------   
+
+    任何数量的 = 和 - 都可以有效果。
+
+    类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：
+
+        # 这是 H1
+
+        ## 这是 H2
+
+        ###### 这是 H6
+
+    可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 #，而行尾的 # 数量也不用和开头一样（行首的井字符数量决定标题的阶数）。
+
+区块引用
+
+    Markdown 标记区块引用是使用类似 email 中用 > 的引用方式。
+
+        > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+        > consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+        > Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+        > 
+        > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+        > id sem consectetuer libero luctus adipiscing.
+
+    Markdown 也允许只在整个段落的第一行最前面加上 > ：
+        > This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
+            consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+            Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
+        > 
+        > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
+            id sem consectetuer libero luctus adipiscing.
+
+
+    区块引用可以嵌套（例如：引用内的引用），只要根据层次加上不同数量的 > ：
+        This is the first level of quoting.
+        >
+        > > This is nested blockquote.
+        >
+        > Back to the first level.
+
+    引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：
+        > ## 这是一个标题。
+        > 
+        > 1.   这是第一行列表项。
+        > 2.   这是第二行列表项。
+        > 
+        > 给出一些例子代码：
+        > 
+        >     return shell_exec("echo $input | $markdown_script");
+
+列表
+
+    Markdown 支持有序列表和无序列表。
+
+    无序列表使用星号、加号或是减号作为列表标记：
+        *   Red
+        *   Green
+        *   Blue
+    三者效果等同。
+
+    有序列表则使用数字接着一个英文句点，如上所示。
+
+    列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。要让列表看起来更漂亮，你可以把内容用固定的缩进整理好：
+
+        *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+            Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+            viverra nec, fringilla in, laoreet vitae, risus.
+        *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+            Suspendisse id sem consectetuer libero luctus adipiscing.
+
+    如果列表项目间用空行分开，在输出 HTML 时 Markdown 就会将项目内容用 <p> 标签包起来，举例来说：
+
+        *   Bird
+        *   Magic
+
+    会被转换为：
+        <ul>
+        <li>Bird</li>
+        <li>Magic</li>
+        </ul>
+
+    但是这个：
+
+        *   Bird
+
+        *   Magic
+
+    会被转换为：
+
+        <ul>
+        <li><p>Bird</p></li>
+        <li><p>Magic</p></li>
+        </ul>
+
+    列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：
+
+        1.  This is a list item with two paragraphs. Lorem ipsum dolor
+            sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+            mi posuere lectus.
+
+            Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+            vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+            sit amet velit.
+
+        2.  Suspendisse id sem consectetuer libero luctus adipiscing.
+
+    如果要在列表项目内放进引用，那 > 就需要缩进，如果要放代码区块的话，该区块就
+    需要缩进两次，也就是 8 个空格或是 2 个空格。
+
+代码区块
+
+    Markdown 会用 <pre> 和 <code> 标签来把代码区块包起来。
+    在 Markdown 中建立代码区块很简单，缩进 4 个空格或是 1 个制表符即可。
+    
+    一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。
+
+    在代码区块里面， & 、 < 和 > 会自动转成 HTML 实体，这样的方式让你非常容易使用
+    Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进即可。
+    代码区块中，一般的 Markdown 语法不会被转换，如 * 。
+
+分隔线
+
+    可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。也
+    可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：
+
+链接
+
+    Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。
+    不管是哪一种，链接文字都是用 [方括号] 来标记。
+
+    要建立一个行内式的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，
+    如果想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来
+    即可，例如：
+        This is [an example](http://example.com/ "Title") inline link.
+        [This link](http://example.net/) has no title attribute.
+
+    如果要链接到同样主机的资源，可以使用相对路径：
+        See my [About](/about/) page for details.
+
+    参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入
+    用以辨识链接的标记：
+        This is [an example][id] reference-style link.
+    接着，在文件的任意处，你可以把这个标记的链接内容定义出来：
+        [id]: http://example.com/  "Optional Title Here"
+
+    链接内容定义的形式为：
+        方括号（前面可以选择性地加上至多三个空格来缩进），里面输入链接文字
+        接着一个冒号
+        接着一个以上的空格或制表符
+        接着链接的网址
+        选择性地接着 title 内容，可以用单引号、双引号或是括弧包着
+    如：
+        [foo]: http://example.com/  "Optional Title Here"
+        [foo]: http://example.com/  'Optional Title Here'
+        [foo]: http://example.com/  (Optional Title Here)
+    
+    网址定义只有在产生链接的时候用到，并不会直接出现在文件之中。链接辨别标签可以有字母、数字、空白和标点符号，但是并不区分大小写，因此下面两个链接是一样的：
+        [link text][a]
+        link text][A]
+
+    隐式链接标记功能让你可以省略指定链接标记，这种情形下，链接标记会视为等同于链接文字，要用隐式链接标记只要在链接文字后面加上一个空的方括号。
+
+    参考式的链接其实重点不在于它比较好写，而是它比较好读。
+
+强调
+
+    Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 <em> 标签包围，用两个 * 或 _ 包起来的话，则会被转成 <strong>，例如：
+        *single asterisks*
+
+        _single underscores_
+
+        **double asterisks**
+
+        __double underscores__
+
+    但是如 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。如果要在文字前后直接插入普通的星号或底线，可以用反斜线。
+
+    如果要标记一小段行内代码，可以用反引号把它包起来（`），例如：
+        Use the `printf()` function.
+    如果要在代码区段内插入反引号，可以用多个反引号来开启和结束代码区段
+
+    在代码区段内，& 和方括号都会被自动地转成 HTML 实体。
+
+图片
+
+    Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。
+    详细叙述如下：
+        一个惊叹号 !
+        接着一个方括号，里面放上图片的替代文字
+        接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 'title' 文字。
+
+表格
+
+    语法说明：
+    1. 不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行代表一个表格行；
+    2. 列与列之间用管道符号 “|” 隔开，原生方式的表格每一行的两边也要有管道符。
+    3. 可在第二行指定不同列单元格内容的对齐方式，默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。
+
+其它
+
+    Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱。
